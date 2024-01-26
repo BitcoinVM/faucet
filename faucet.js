@@ -152,9 +152,9 @@ async function sendEvmosTx(recipient, chain) {
 
   try{
     const chainConf = conf.blockchains.find(x => x.name === chain) 
-    // const ethProvider = new ethers.providers.JsonRpcProvider(chainConf.endpoint.evm_endpoint);
+    const ethProvider = new ethers.providers.JsonRpcProvider(chainConf.endpoint.evm_endpoint);
 
-    const wallet = Wallet.fromMnemonic(chainConf.sender.mnemonic); // .connect(ethProvider);
+    const wallet = Wallet.fromMnemonic(chainConf.sender.mnemonic).connect(ethProvider);
 
     let evmAddress =  recipient;
     if(recipient && !recipient.startsWith('0x')) {
